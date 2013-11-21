@@ -151,7 +151,7 @@
       \vspace{6cm}
       {\large \textbf{\MakeUppercase\@title}}\\
       \vspace{4cm}
-      
+
       \hfill{\parbox{8cm}{Proposta de Disserta{\c c}{\~a}o de Mestrado
           apresentada  ao Programa   de P{\'o}s-Gradua{\c c}{\~a}o  em
           Inform{\'a}tica, Setor de Ci{\^e}ncias Exatas,
@@ -174,7 +174,7 @@
       \vspace{6cm}
       {\large \textbf{\MakeUppercase\@title}}\\
       \vspace{4cm}
-      
+
       \hfill{\parbox{8cm}{Disserta{\c   c}{\~a}o  apresentada   como
           requisito  parcial  {\`a} obten{\c  c}{\~a}o  do  grau  de
           Mestre.    Programa  de     P{\'o}s-Gradua{\c    c}{\~a}o  em
@@ -219,7 +219,7 @@
       \vspace{6cm}
       {\large \textbf{\MakeUppercase\@title}}\\
       \vspace{4cm}
-      
+
       \hfill{\parbox{8cm}{Monografia de Trabalho de
           Gradua{\c   c}{\~a}o apresentada ao Programa de Bacharelado
           em Ci{\^e}ncia da Computa{\c   c}{\~a}o, Departamento de
@@ -250,12 +250,12 @@
         requisito  parcial  {\`a} obten{\c  c}{\~a}o  do  grau  de
         Mestre no Programa  de     P{\'o}s-Gradua{\c    c}{\~a}o  em
         Inform{\'a}tica da Universidade Federal  do  Paran{\'a}, pela
-        Comiss„o formada pelos professores:\\
+        Comiss√£o formada pelos professores:\\
       \end{center}
       \vspace{0.5cm}
       \hfill{\parbox{12cm}{
       \begin{itemize}
-      \item[\@advisortitle:] \@banca          
+      \item[\@advisortitle:] \@banca
       \end{itemize}
       }}\par
       \null\vfill

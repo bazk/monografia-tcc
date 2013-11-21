@@ -371,8 +371,8 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-	{ "p·ginas" pages n.dashify tie.or.space.connect }
-	{ "p·ginas" pages tie.or.space.connect }
+	{ "p√°ginas" pages n.dashify tie.or.space.connect }
+	{ "p√°ginas" pages tie.or.space.connect }
       if$
     }
   if$
@@ -403,7 +403,7 @@ FUNCTION {format.chapter.pages}
 { chapter empty$
     'format.pages
     { type empty$
-	{ "capÌtulo" }
+	{ "cap√≠tulo" }
 	{ type "l" change.case$ }
       if$
       chapter tie.or.space.connect
@@ -447,7 +447,7 @@ FUNCTION {format.thesis.type}
 
 FUNCTION {format.tr.number}
 { type empty$
-    { "RelatÛrio TÈcnico" }
+    { "Relat√≥rio T√©cnico" }
     'type
   if$
   number empty$
@@ -740,7 +740,7 @@ FUNCTION {mastersthesis}
   new.block
   format.title "title" output.check
   new.block
-  "DissertaÁ„o de Mestrado" format.thesis.type output.nonnull
+  "Disserta√ß√£o de Mestrado" format.thesis.type output.nonnull
   school "school" output.check
   address output
   format.date "year" output.check
@@ -845,7 +845,7 @@ MACRO {jan} {"janeiro"}
 
 MACRO {feb} {"fevereiro"}
 
-MACRO {mar} {"marÁo"}
+MACRO {mar} {"mar√ßo"}
 
 MACRO {apr} {"abril"}
 
