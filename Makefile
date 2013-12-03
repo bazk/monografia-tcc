@@ -10,12 +10,12 @@ $(OUTPUT).pdf: $(OUTPUT).dvi
 	dvipdf $(OUTPUT).dvi $(OUTPUT).pdf
 
 $(OUTPUT).dvi: $(OUTPUT).tex $(BIB).bbl
-	latex $(OUTPUT)
-	latex $(OUTPUT)
+	latex $(OUTPUT) </dev/null
+	latex $(OUTPUT) </dev/null
 
 $(BIB).bbl: $(BIB).bib
-	latex $(OUTPUT)
-	bibtex $(OUTPUT)
+	latex $(OUTPUT) </dev/null
+	bibtex $(OUTPUT) </dev/null
 
 clean:
 	rm -f *.aux
