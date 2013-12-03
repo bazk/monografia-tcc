@@ -15,24 +15,41 @@ pode receber um ou mais sinais de entrada.
 
 \subsection{Multi-Layer Perceptron (MLP)}
 
-Uma rede neural MLP é composta por uma série de neurônios organizados em camadas, onde cada neurônio recebe, como entrada, a saída dos neurônios da camada anterior. A saída (y) de um neurônio é determinada pela aplicação de uma função de ativação \(\theta\) sobre a combinação linear de todas as suas \(n\) entradas \((x_1, x_2, ..., x_n)\). Matematicamente,
+Uma rede neural MLP é composta por uma série de neurônios organizados em camadas, onde cada neurônio recebe, como entrada, a saída dos neurônios da camada anterior. Uma rede com uma camada intermediária é capaz de aproximar qualquer função contínua. Com duas camadas intermediárias, qualquer função pode ser aproximada \cite{cybenko89mlp}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/mlp}
+    \caption{Multi-layer Perceptron}
+    \label{fig:mlp}
+\end{figure}
+
+A saída (y) de um neurônio é determinada pela aplicação de uma função de ativação \(\theta\) sobre a combinação linear ponderada de todas as suas \(n\) entradas \((x_1, x_2, \dots , x_n)\).
+
+Matematicamente,
 
 \[ y = \theta ( \sum_{i=1}^{n} w_i x_i ) \]
 
 onde \(w_i\) é um peso associado a entrada \(i\).
 
 Diversas funções pode assumir o papel de função de ativação, sendo as mais comuns:
-a função degrau [formula] e a função sigmóide [formula].
+a função degrau (\ref{eq:degrau}) e a função sigmóide (\ref{eq:sigmoid}).
 
-formulas
+\begin{equation} \label{eq:degrau}
+    \theta(x) = \left\{
+    \begin{array}{l l}
+        0 & \quad \text{se } x < 0\\
+        1 & \quad \text{caso contrário}
+    \end{array} \right.
+\end{equation}
 
-figure
+\begin{equation} \label{eq:sigmoid}
+    \theta(x) = \frac{1}{1 + e^{-x}}
+\end{equation}
 
-Uma rede com uma camada intermediária é capaz de aproximar qualquer função
-contínua. Com duas camadas intermediárias, qualquer função pode ser aproximada
-\cite{cybenko89mlp}.
+É comum encontrar, em cada uma das camadas, um neurônio adicional cuja entrada é sempre \(1\). Este neurônio especial tem o nome de \textit{bias} e a finalidade de deslocar a função de ativação para direita ou esquerda.
 
-O ajuste dos pesos w1..wn é chamado treinamento e existe em duas formas:
+O ajuste dos pesos \((w_1, w_2, \dots , w_n)\) é chamado treinamento e existe em duas formas:
 
 \begin{description}
     \item[Supervisionado]: É fornecido ao algoritmo de treinamento um conjunto de entradas/saídas. O algoritmo iterativamente ajusta os pesos da rede a fim de que, dadas entradas do conjunto de treinamento, as saídas da rede aproximem-se das saídas.
