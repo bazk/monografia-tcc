@@ -13,50 +13,18 @@ universais \cite{hornik89universal}. Um RNA é composto por uma rede de unidades
 de processamento simples (neurônios). Cada neurônio possui um sinal de saída e
 pode receber um ou mais sinais de entrada.
 
-\subsection{McCulloch-Pitts (MCP)}
+\subsection{Multi-Layer Perceptron (MLP)}
 
-No modelo proposto por McCulloch e Pitts \cite{mcculloch43mcp}, a saída (y) de
-um neurônio artificial é determinada pela aplicação de uma função de ativação 0
-sobre a combinação linear de todas as suas n entradas (x1, x2, ..., xn).
-Matematicamente,
+Uma rede neural MLP é composta por uma série de neurônios organizados em camadas, onde cada neurônio recebe como entrada a saída dos neurônios da camada anterior. A saída (y) de um neurônio é determinada pela aplicação de uma função de ativação teta sobre a combinação linear de todas as suas n entradas (x1, x2, ..., xn). Matematicamente,
 
-formula
+y = teta(sum(x1..xn))
 
 onde wi é um peso associado a entrada i.
 
-Diversar funções pode assumir o papel de função de ativação, sendo as mais comuns:
+Diversas funções pode assumir o papel de função de ativação, sendo as mais comuns:
 a função degrau [formula] e a função sigmóide [formula].
 
 formulas
-
-figure
-
-\subsection{Perceptron}
-
-O ajuste dos pesos das conexões wi é chamado treinamento e existe em duas formas:
-
-1. Treinamento supervisionado: É fornecido ao algoritmo de treinamento um
-conjunto de entradas/saídas. O algoritmo iterativamente ajusta os pesos da rede
-a fim de que, dadas entradas do conjunto de treinamento, as saídas da rede
-aproximem-se das saídas do conjunto de treinamento.
-
-2. Treinamento não supervisionado: Não demanda conjunto de treinamento, os pesos
-são ajustados considerando a aptidão da rede à solução do problema.
-
-?? O primeiro modelo de RNA com aprendizado foi introduzido em
-\cite{rosenblatt58perceptron}, o Perceptron. O perceptron consiste em uma RNA
-baseada em MCP e um algoritmo de aprendizado supervisionado.
-
-figure ?
-
-\subsection{Multi-Layer Perceptron (MLP)}
-
-O perceptron não resolve problemas não-lineramente separáveis, ou seja, ...
-
-figure
-
-Todavia, problemas não-linearmente separáveis são resolvidos por redes com uma
-ou mais camadas intermediárias (também chamadas de camadas escodidas).
 
 figure
 
@@ -64,22 +32,31 @@ Uma rede com uma camada intermediária é capaz de aproximar qualquer função
 contínua. Com duas camadas intermediárias, qualquer função pode ser aproximada
 \cite{cybenko89mlp}.
 
+O ajuste dos pesos w1..wn é chamado treinamento e existe em duas formas:
+
+\begin{description}
+    \item[Supervisionado]: É fornecido ao algoritmo de treinamento um conjunto de entradas/saídas. O algoritmo iterativamente ajusta os pesos da rede a fim de que, dadas entradas do conjunto de treinamento, as saídas da rede aproximem-se das saídas.
+    \item[Não supervisionado]: Não demanda conjunto de treinamento, os pesos
+são ajustados considerando a aptidão da rede à solução do problema.
+\end{description}
+
 \subsection{Time-Delay Neural Network (TDNN)}
 
-Extendendo os conceitos do MLP, uma TDNN permite à cada neurônio armazenar um
-histórico limitado dos sinais de entrada. Isto permite que a rede ganhe
-sensibilidade à padrões temporais \cite{kaiser94tdnn}.
+Extendendo os conceitos das redes MLP, uma TDNN permite à cada neurônio armazenar um
+histórico dos sinais de entrada. Isto permite que a rede ganhe sensibilidade à padrões temporais, ou seja, a rede pode adaptar-se não só à padrões como também à sequência de padrões \cite{kaiser94tdnn}.
+
+Este modelo de rede neural é de especial importância na área de robótica. As ações determinadas pelo controlador de um robô devem levar em conta o histórico sensorial e não apenas o estado sensorial atual.
 
 \section{Controle de Robôs Móveis por RNA}
 
-ann as robot controller
+% ann as robot controller
 
-[zhang 2000]
-Although many types of neural networks can be used
-for classification purposes [105], our focus nonetheless is on
-the feedforward multilayer networks or multilayer perceptrons
-(MLPs) which are the most widely studied and used neural net-
-work classifiers.
+% [zhang 2000]
+% Although many types of neural networks can be used
+% for classification purposes [105], our focus nonetheless is on
+% the feedforward multilayer networks or multilayer perceptrons
+% (MLPs) which are the most widely studied and used neural net-
+% work classifiers.
 
 \section{Algoritmos de Otimização para Treinamento de RNA}
 \label{optimization-algorithms}
