@@ -1,7 +1,9 @@
-\chapter{Rob{\'o}tica de Enxame}
+\chapter{Robótica de enxame}
 \label{swarm}
 
 \section{Introdução}
+
+\section{Inteligência coletiva}
 
 Observando os seres vivos presentes na natureza, podemos facilmente extrair algumas qualidades que estes apresentam: flexibilidade, robustez, descentralização, auto-organização. Em grande parte, o motivo por trás dessas qualidades é a coletividade. Por exemplo, em colônias de insetos sociais, diversos indivíduos se auto-organizam para realizar tarefas cuja  escala e complexidade superam, e muito, os limites físicos e cognitivos de cada indivíduo. Podemos visualizar uma colônia como um único super-organismo [Trianni 2011] e podemos interpretar inteligência como uma característica que emerge das interações entre componentes simples e interdependentes de um sistema.
 
@@ -55,9 +57,9 @@ utilizados para a solução coletiva de problemas.
 
 \section{Formação de caminho}
 
+Da observação do comportamento de diversas espécies de formigas, nota-se o uso de químicos (feromônios) para estabelecer uma forma de comunicação que permite: o recrutamento em massa de indivíduos e a formação dinâmica de um caminho para transporte do alimento para dentro da colônia.
 
+No contexto de robótica de enxame, Fujisawa et al. \cite{fujisawa2008pheromone} recria com sucesso esse comportamento em um grupo de robôs. No entanto, a síntese, armazenamento, fator de evaporação e detecção confiável dos quimícos não é nada simples e dificulta o uso prático de tal método.
+Por outro lado, diversas abordagens ao problema procuram alternativas aos feromônios, por exemplo: projeção luminosa [], \textit{RFID} [], trilhas virtuais [] etc.
 
-% - Deslocamento coordenado (flocking) (Sperati 08 e trabalhos relacionados)
-% - Deslocamento coordenado (flocking) para solução coletiva de problemas
-%   (abordagem proposta pelo Sperati 11, foraging, transporte coletivo e
-%   trabalhos relacionados)
+Neste trabalho focaremos no seguinte problema: recriar o comportamento de formação de caminho de forma eficiente (menor caminho) entre duas áreas alvo por um enxame de robôs. A posição das áreas alvo são, inicialmente, desconhecidas pelos agentes. O robô é capaz de mover-se livremente dentro de um espaço retangular limitado por paredes. Outros robôs e as paredes são sensíveis à sensores presentes em cada robô. Os agentes também são capazes de identificar e emitir luzes para estabelecer alguma forma de comunicação. Contudo, explorando o alcance limitado dos sensores, as áreas alvo são posicionadas a fim de impedir que ambas áreas sejam percebidas, ao mesmo tempo, por um mesmo agente.
