@@ -5,9 +5,9 @@
 
 \section{Ambiente de simulação}
 
-Os algoritmos de otimização utlizados na fase de treinamento (seção \ref{optimization-algorithms}) necessitam de múltiplas avaliações da função de \textit{fitness} (na ordem das dezenas de milhar). Conforme mencionado anteriormente (), a avaliação da função de \textit{fitness} consiste na observação do movimento dos robôs por um determinado intervalo de tempo. Logo, a utilização de robôs reais em um ambiente físico é, apesar de possível, impraticável visto o tempo demandado por tal método. Além disso, não temos a disposição o número necessário de robôs para a realização dos experimentos.
+Os algoritmos de otimização utilizados na fase de treinamento (seção \ref{optimization-algorithms}) necessitam de múltiplas avaliações da função de \textit{fitness} (na ordem das dezenas de milhar). Conforme mencionado anteriormente (), a avaliação da função de \textit{fitness} consiste na observação do movimento dos robôs por um determinado intervalo de tempo. Logo, a utilização de robôs reais em um ambiente físico é, apesar de possível, impraticável visto o tempo demandado por tal método. Além disso, não temos a disposição o número necessário de robôs para a realização dos experimentos.
 
-Assim, surge naturalmente a necessidade de um ambiente de simulação virtual que imite com fidelidade os robôs e o ambiente à que estes serão submetidos. A forma mais comum de simulação baseia-se na aplicação de mêcanica Newtoniana, porém Miglino et al. \cite{miglino96evolving} aponta algumas dificuldades que podem ser encontradas com este tipo de simulador na fase de treinamento:
+Assim, surge naturalmente a necessidade de um ambiente de simulação virtual que imite com fidelidade os robôs e o ambiente à que estes serão submetidos. A forma mais comum de simulação baseia-se na aplicação de mecânica Newtoniana, porém Miglino et al. \cite{miglino96evolving} aponta algumas dificuldades que podem ser encontradas com este tipo de simulador na fase de treinamento:
 \begin{enumerate}
     \item Vários simuladores não consideram todas as leis da física envolvidas na interação entre agentes reais com o ambiente, por exemplo massa, peso, fricção, inércia etc.
     \item Sensores físicos retornam valores incertos e comandos enviados aos atuadores têm efeitos incertos. Em contraste, os ambientes de simulação geralmente retornam informações perfeitas.
@@ -16,7 +16,7 @@ Assim, surge naturalmente a necessidade de um ambiente de simulação virtual qu
 
 Estas dificuldades podem impedir a transição entre o ambiente de treinamento e o ambiente real.
 
-Em seguida, Miglino et al. \cite{miglino96evolving} propõe um modelo de simulação baseado em amostragem. Utilizando um robô no ambiente real, constroí-se uma tabela contendo amostragens do deslocamento linear e angular para diferentes valores aplicados aos atuadores. A partir daí, as fórmulas de física clássica do simulador são substituidas por consultas nesta tabela. De forma análoga, os sensores do robô são amostrados para cada uma das diferentes classes de obstáculos presentes no ambiente.
+Em seguida, Miglino et al. \cite{miglino96evolving} propõe um modelo de simulação baseado em amostragem. Utilizando um robô no ambiente real, constrói-se uma tabela contendo amostragens do deslocamento linear e angular para diferentes valores aplicados aos atuadores. A partir daí, as fórmulas de física clássica do simulador são substituídas por consultas nesta tabela. De forma análoga, os sensores do robô são amostrados para cada uma das diferentes classes de obstáculos presentes no ambiente.
 
 % Implementação
 % - Introdução
