@@ -5,6 +5,8 @@
 *.log
 *.lot
 *.toc
+*.out
+*.idx
 monografia.pdf
 monografia.ps
 monografia.dvi
