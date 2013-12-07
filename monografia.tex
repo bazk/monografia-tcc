@@ -13,6 +13,8 @@
 \usepackage{setspace}
 \usepackage{ps-macros}
 % \usepackage{psfig}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{makeidx}
 
 \setcounter{secnumdepth}{3}    % n - numero de niveis de subsubsection numeradas
 \setcounter{tocdepth}{3}       % coloca ate o nivel n no sumario
@@ -32,7 +34,13 @@
 % {}{}    % se houver um quarto membro na banca, inserir nome e instituicao
 % \defesa{04 de outubro de 2000} % dia em que foi realizada a defesa da dissertacao
 
+\makeindex
+
 \begin{document}
+
+\pdfstringdefDisableCommands{%
+    \let\MakeUppercase\relax
+}
 
 \makecapamonografia
 \makerostomonografia
@@ -59,14 +67,16 @@
 \newpage
 
 \listoffigures
-\addcontentsline{toc}{chapter}{\MakeUppercase{LISTA DE FIGURAS}}
+\addcontentsline{toc}{chapter}{LISTA DE FIGURAS}
 \newpage
 
 \listoftables
-\addcontentsline{toc}{chapter}{\MakeUppercase{LISTA DE TABELAS}}
+\addcontentsline{toc}{chapter}{LISTA DE TABELAS}
 \newpage
 
 \tableofcontents
+\addcontentsline{toc}{chapter}{SUMÁRIO}
+\newpage
 
 \pagenumbering{arabic}
 
