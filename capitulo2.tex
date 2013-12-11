@@ -24,11 +24,11 @@ Uma rede neural MLP é composta por uma série de neurônios organizados em cama
     \label{fig:mlp}
 \end{figure}
 
-A saída (y) de um neurônio é determinada pela aplicação de uma função de ativação \(\theta\) sobre a combinação linear ponderada de todas as suas \(n\) entradas \((x_1, x_2, \dots , x_n)\).
+A saída (y) de um neurônio é determinada pela aplicação de uma função de ativação \(\sigma\) sobre a combinação linear ponderada de todas as suas \(n\) entradas \((x_1, x_2, \dots , x_n)\).
 
 Matematicamente,
 
-\[ y = \theta ( \sum_{i=1}^{n} w_i x_i ) \]
+\[ y = \sigma ( \sum_{i=1}^{n} w_i x_i ) \]
 
 onde \(w_i\) é um peso associado a entrada \(i\).
 
@@ -36,7 +36,7 @@ Diversas funções pode assumir o papel de função de ativação, sendo as mais
 a função degrau (\ref{eq:degrau}) e a função sigmóide (\ref{eq:sigmoid}).
 
 \begin{equation} \label{eq:degrau}
-    \theta(x) = \left\{
+    \sigma (x) = \left\{
     \begin{array}{l l}
         0 & \quad \text{se } x < 0\\
         1 & \quad \text{caso contrário}
@@ -44,7 +44,7 @@ a função degrau (\ref{eq:degrau}) e a função sigmóide (\ref{eq:sigmoid}).
 \end{equation}
 
 \begin{equation} \label{eq:sigmoid}
-    \theta(x) = \frac{1}{1 + e^{-x}}
+    \sigma (x) = \frac{1}{1 + e^{-x}}
 \end{equation}
 
 É comum encontrar, em cada uma das camadas, um neurônio adicional cuja entrada é sempre \(1\). Este neurônio especial tem o nome de \textit{bias} e a finalidade de deslocar a função de ativação para direita ou esquerda.
