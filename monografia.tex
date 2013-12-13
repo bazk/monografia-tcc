@@ -5,16 +5,31 @@
 \usepackage{amssymb,amsmath}
 \usepackage{epsfig}
 \usepackage{multirow}
-
 \usepackage{amssymb}
-\usepackage{subfigure}
 \usepackage{graphicx}
-\usepackage{caption2}
 \usepackage{setspace}
 \usepackage{ps-macros}
-% \usepackage{psfig}
 \usepackage[linktocpage=true]{hyperref}
 \usepackage{makeidx}
+% \usepackage{caption2}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\floatname{algorithm}{Algoritmo}
+\renewcommand\algorithmicend{\textbf{fim}}
+\renewcommand\algorithmicdo{\textbf{faça}}
+\renewcommand\algorithmicwhile{\textbf{enquanto}}
+\renewcommand\algorithmicfor{\textbf{para}}
+\renewcommand\algorithmicforall{\textbf{para todo}}
+\renewcommand\algorithmicif{\textbf{se}}
+\renewcommand\algorithmicthen{\textbf{então}}
+\renewcommand\algorithmicelse{\textbf{senão}}
+\renewcommand\algorithmicreturn{\textbf{retorne}}
+\algnewcommand\algorithmicforeach{\textbf{para cada}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}%
 
 \setcounter{secnumdepth}{3}    % n - numero de niveis de subsubsection numeradas
 \setcounter{tocdepth}{3}       % coloca ate o nivel n no sumario

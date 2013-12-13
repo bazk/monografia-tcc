@@ -3,62 +3,41 @@
 
 \section{Introdução}
 
-Dividimos os experimentos em duas partes: algoritmos de treinamento e cenários de treinamento. Na primeira, realizamos comparações entre quatro algoritmos de treinamento (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados. Em seguida, fazemos um estudo sobre cinco diferentes cenários de treinamento e o efeito de cada para resolução do problema de formação de caminho.
+Dividimos os experimentos em duas partes: algoritmos de treinamento e cenários de avaliação. Na primeira, realizamos comparações entre quatro algoritmos de treinamento (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados. Já na segunda parte, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho.
 
-\section{Algoritmos de treinamento}
+\section{Cenários de avaliação}
+
+Na Seção \ref{sec:training}, vimos a definição da função de \textit{fitness} e como é feito o treinamento. A cada geração (ou iteração) do algoritmo de treinamento, todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses vários testes define um cenário de avaliação.
+
+Antes de mais nada, faz-se necessária a seguinte definição: seja $t_{1}$ e $t_{2}$ o centro de cada uma das duas áreas alvo e $O$ um ponto definido na origem do sistema, as áreas alvo são simétricas em relação à origem se $t_{1}$, $t_{2}$ e $O$ são colineares e $O$ é equidistante de $t_{1}$ e $t_{2}$. A reta que contém $t_{1}$, $t_{2}$ e $O$ é chamada eixo de simetria.
+
+O primeiro cenário denomina-se \textit{Non-Symmetrical Random} (NSP) e consiste de 16 testes onde, em cada um, as áreas alvo tem posição aleatória e não são necessariamente simétricas em relação a origem. Observe que a distância entre as áreas alvo é limitada ao intervalo $[0,8..1,4]$. Esse cenário representa exatamente o problema que estamos tentando resolver.
+
+O cenário \textit{Symmetrical Random} (SR) é semelhante ao NSP porém a posição das áreas alvo é simétrica em relação a origem.
+
+O cenário \textit{Variable Distances} (VD) compõe-se testes onde o angulo formado pelo eixo de simetria e o eixo das abscissas é fixado em $135^{\circ}$ e a distância entre as áreas alvo é escolhida do conjunto $D = \{0,8; 1,0; 1,2; 1,4\}$. Executa-se 4 testes para cada distância do conjunto $D$, totalizando 16 testes.
+
+
+Os testes que compõe o cenário \textit{Variable Axis} (VA) tem áreas alvo com distância fixa em 1,2 metros e o conjunto $A = \{0; 45; 90; 135\}$ determina o ângulo (em graus) formado pelo eixo de simetria e o eixo das abscissas. Nesse também executa-se 4 testes para cada ângulo do conjunto $A$, também totalizando 16 testes.
+
+Unindo os conceitos dos cenários VD e VA, o cenário \textit{Variable Distances and Axis} (VDA) determina as distâncias e ângulos das áreas alvo a partir dos conjuntos $D$ e $A$. Executa-se um teste para cada combinação de uma distância de $D$ com um ângulo de $A$, totalizando 16 testes.
+
+Em todos os cenários, a posição inicial dos robôs é aleatória para cada teste.
+
+\section{Parâmetros e operadores}
 
 Antes de mais nada, é necessário determinar como será feita a representação dos parâmetros da rede neural. No PSO, uma solução é representada por um vetor de valores contínuos (vetor posição), nesse caso a representação é direta e cada elemento do vetor equivale á um parâmetro (um peso, \textit{bias} ou \textit{time constraint}).
 
-Os outros três algoritmos representam soluções como valores discretos, portanto os parâmetros são discretizados, uniformemente, em 256 valores.
-
-No caso do GA e do CGPGA, estes valores discretos são concatenados formando uma string de bits.
+Os outros três algoritmos representam soluções como valores discretos, portanto os parâmetros são discretizados, uniformemente, em 256 valores. No caso do GA e do CGPGA, estes valores discretos são concatenados formando uma string de bits.
 
 \subsection{GA}
 
-O algoritmo inicia com uma uma população de 120 indivíduos gerados aleatoriamente e executa por 500 gerações. A cada geração 20 indivíduos são selecionados pelo método da roleta russa e aplicam os operadores de cruzamento e mutação gerando uma nova população (cada indivíduo selecionado gera 6 novos indivíduos). Os seis melhores indivíduos são mantidos na nova população (elitismo). A estrategia de cruzamento é a de ponto único e ocorre a uma taxa de 70\%. A inversão de cada um dos \textit{bits} dos cromossomos acontece com 3\% probabilidade (mutação).
+O algoritmo inicia com uma uma população de 120 indivíduos gerados aleatoriamente e executa por 500 gerações. A cada geração 20 indivíduos são selecionados pelo método da roleta russa e aplicam os operadores de cruzamento e mutação gerando uma nova população (cada indivíduo selecionado gera 6 novos indivíduos). Os seis melhores indivíduos são mantidos na nova população (elitismo). A estrategia de cruzamento é a de ponto único e ocorre a uma taxa de 70\%. A inversão de cada um dos \textit{bits} dos cromossomos acontece com 3\% de probabilidade (mutação).
 
 \subsection{CGPGA}
 
 O experimento com CPGA utiliza quatro ilhas em anel, cada uma com uma população de 30 indivíduos. Os parâmetros são iguais aos descritos na seção anterior, com exceção do elitismo (que nesse caso é de 3 indivíduos) e da quantidade de indivíduos selecionados (5 indivíduos).
 
-\subsection{PSO}
+\subsection{PSO e DPSO}
 
-Assim como no GA, a população de partículas é iniciado com 120 indivíduos e executa 500 iterações. O vetor velocidade $v_{i} = (v_{i,1}, v_{i,2}, \dots, v_{i,n})$ e o vetor posição $x_{i} = (x_{i,1}, x_{i,2}, \dots, x_{i,n})$ da partícula $i$ a cada iteração $t$ é atualizada da seguinte forma:
-
-\begin{equation}
-v_{i}^{t} = \omega v_{i}^{t-1} + \alpha \phi (p_{i}^{best} - x_{i}^{t-1}) + \beta \phi (g^{best} - x_{i}^{t-1})
-\end{equation}
-
-\begin{equation}
-x_{i}^{t} = x_{i}^{t-1} + v_{i}^{t}
-\end{equation}
-
-onde $\phi$ é um número aleatório de distribuição uniforme [0,1], $p_{i}^{best}$ é melhor vetor posição encontrado pela partícula $i$ e $g^{best}$ é a melhor posição encontrada por todas as partículas.
-
-Os parâmetros $\omega$, $\alpha$ e $\beta$ escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
-
-\subsection{DPSO}
-
-Esta variação do PSO utiliza os mesmo parâmetros de tal, a diferença está na representação da posição e velocidade das partículas. No DPSO, o vetor posição $x_{i} = (x_{i1}, x_{i2}, \dots, x_{in})$ de uma partícula $i$ está contido num espaço $n$-dimensional discreto e o vetor velocidade $v_{i} = (v_{i,1,1}, v_{i,1,2}, \dots, v_{i,n,m})$ contém as probabilidades da partícula assumir determinadas posições. Ou seja,
-
-$$
-S_{i,j} = \sum_{k}^{m} \sigma(v_{i,j,k})
-$$
-
-$$
-P(x_{i,j} = k) = \frac{\sigma (v_{i,j,k})}{S_{i,j}}
-$$
-
-onde $\sigma$ é a função \textit{sigmoid}, $v$ é o vetor de velocidades e $x$ é o vetor posição. Desse modo, a probabilidade de $x_{i,j}$ assumir um valor $k$ é determinada pela velocidade $v_{i,j,k}$.
-
-Note que $S_{i,j}$ é um coeficiente de normalização e tem a finalidade de permitir que $x_{i,j}$ possa assumir qualquer valor de $k$.
-
-\section{Cenários de treinamento}
-
-Na Seção \ref{sec:training}, vimos a definição da função de \textit{fitness} e como é feito o treinamento. A cada geração (ou iteração) do algoritmo de treinamento, todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô e áreas alvo em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da aptidão daquele indivíduo. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média de \textit{fitness} de vários testes com configurações específicas. O conjunto desses vários testes define um cenário de treinamento.
-
-O primeiro cenário avaliado ($c_{1}$) consiste de 16 testes onde, em cada um, a posição inicial das áreas alvo é aleatória, porém a distância, em centímetros, entre elas está no intervalo [80..140], obrigatoriamente.
-
-(definir cenários $c_{2}$ $c_{3}$ e $c_{4}$)
-
-Em todos os cenários, a posição dos robôs é aleatória para cada teste.
+A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
