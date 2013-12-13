@@ -1,34 +1,35 @@
 \chapter{Experimentos}
-\label{experimentos}
+\label{cha:experiments}
 
 \section{Introdução}
 
-Dividimos os experimentos em duas partes: algoritmos de treinamento e cenários de avaliação. Na primeira, realizamos comparações entre quatro algoritmos de treinamento (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados. Já na segunda parte, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho.
+Dividimos os experimentos em duas partes: cenários de avaliação (seção \ref{sec:evaluation-scenarios}) e algoritmos evolutivos (seção \ref{sec:exp-evo-algorithms}). Na primeira, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho. Já na segunda parte, realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados.
 
 \section{Cenários de avaliação}
+\label{sec:evaluation-scenarios}
 
-Na Seção \ref{sec:training}, vimos a definição da função de \textit{fitness} e como é feito o treinamento. A cada geração (ou iteração) do algoritmo de treinamento, todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses vários testes define um cenário de avaliação.
+A cada geração (ou iteração) de algum dos algoritmos evolutivos (seção \ref{sec:evolutionary-computation}), todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da real aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses testes define um cenário de avaliação.
 
-Antes de mais nada, faz-se necessária a seguinte definição: seja $t_{1}$ e $t_{2}$ o centro de cada uma das duas áreas alvo e $O$ um ponto definido na origem do sistema, as áreas alvo são simétricas em relação à origem se $t_{1}$, $t_{2}$ e $O$ são colineares e $O$ é equidistante de $t_{1}$ e $t_{2}$. A reta que contém $t_{1}$, $t_{2}$ e $O$ é chamada eixo de simetria.
+Antes de mais nada, faz-se necessária a seguinte definição: seja $t_{1}$ e $t_{2}$ o centro de cada uma das duas áreas alvo, essas são simétricas em relação à origem se $t_{1}$, $t_{2}$ e a origem são colineares e a origem é equidistante de $t_{1}$ e $t_{2}$. A reta que contém $t_{1}$, $t_{2}$ e a origem é chamada eixo de simetria.
 
-O primeiro cenário denomina-se \textit{Non-Symmetrical Random} (NSP) e consiste de 16 testes onde, em cada um, as áreas alvo tem posição aleatória e não são necessariamente simétricas em relação a origem. Observe que a distância entre as áreas alvo é limitada ao intervalo $[0,8..1,4]$. Esse cenário representa exatamente o problema que estamos tentando resolver.
+O primeiro cenário denomina-se \textit{Non-Symmetrical Random} (NSR) e consiste de 16 testes onde, em cada um, as áreas alvo tem posição aleatória e não são necessariamente simétricas em relação a origem. Observe que a distância entre as áreas alvo é limitada ao intervalo $[0,8..1,4]$. Esse cenário representa exatamente a instância do problema que estamos tentando resolver (formação de caminho).
 
-O cenário \textit{Symmetrical Random} (SR) é semelhante ao NSP porém a posição das áreas alvo é simétrica em relação a origem.
+O cenário \textit{Symmetrical Random} (SR) é semelhante ao NSR porém a posição das áreas alvo é simétrica em relação a origem.
 
-O cenário \textit{Variable Distances} (VD) compõe-se testes onde o angulo formado pelo eixo de simetria e o eixo das abscissas é fixado em $135^{\circ}$ e a distância entre as áreas alvo é escolhida do conjunto $D = \{0,8; 1,0; 1,2; 1,4\}$. Executa-se 4 testes para cada distância do conjunto $D$, totalizando 16 testes.
-
+O cenário \textit{Variable Distances} (VD) compõe-se testes onde o angulo formado pelo eixo de simetria e o eixo das abscissas é fixado em $135^{\circ}$ e a distância entre as áreas alvo (em metros) é escolhida do conjunto $D = \{0,8; 1,0; 1,2; 1,4\}$. Executa-se 4 testes para cada distância do conjunto $D$, totalizando 16 testes.
 
 Os testes que compõe o cenário \textit{Variable Axis} (VA) tem áreas alvo com distância fixa em 1,2 metros e o conjunto $A = \{0; 45; 90; 135\}$ determina o ângulo (em graus) formado pelo eixo de simetria e o eixo das abscissas. Nesse também executa-se 4 testes para cada ângulo do conjunto $A$, também totalizando 16 testes.
 
-Unindo os conceitos dos cenários VD e VA, o cenário \textit{Variable Distances and Axis} (VDA) determina as distâncias e ângulos das áreas alvo a partir dos conjuntos $D$ e $A$. Executa-se um teste para cada combinação de uma distância de $D$ com um ângulo de $A$, totalizando 16 testes.
+Unindo os cenários VD e VA, o cenário \textit{Variable Distances and Axis} (VDA) determina as distâncias e ângulos das áreas alvo a partir dos conjuntos $D$ e $A$. Executa-se um teste para cada combinação de uma distância de $D$ com um ângulo de $A$.
 
-Em todos os cenários, a posição inicial dos robôs é aleatória para cada teste.
+Em todos os cenários, a posição inicial dos robôs em cada teste é aleatória.
 
-\section{Parâmetros e operadores}
+\section{Parâmetros e operadores dos algoritmos evolutivos}
+\label{sec:exp-evo-algorithms}
 
 Antes de mais nada, é necessário determinar como será feita a representação dos parâmetros da rede neural. No PSO, uma solução é representada por um vetor de valores contínuos (vetor posição), nesse caso a representação é direta e cada elemento do vetor equivale á um parâmetro (um peso, \textit{bias} ou \textit{time constraint}).
 
-Os outros três algoritmos representam soluções como valores discretos, portanto os parâmetros são discretizados, uniformemente, em 256 valores. No caso do GA e do CGPGA, estes valores discretos são concatenados formando uma string de bits.
+Os outros três algoritmos representam soluções como valores discretos, portanto os parâmetros são discretizados uniformemente em 256 valores no intervalo $[0, 256)$. No caso do GA e do CGPGA, estes valores discretos são concatenados formando uma string de bits.
 
 \subsection{GA}
 
@@ -36,8 +37,8 @@ O algoritmo inicia com uma uma população de 120 indivíduos gerados aleatoriam
 
 \subsection{CGPGA}
 
-O experimento com CPGA utiliza quatro ilhas em anel, cada uma com uma população de 30 indivíduos. Os parâmetros são iguais aos descritos na seção anterior, com exceção do elitismo (que nesse caso é de 3 indivíduos) e da quantidade de indivíduos selecionados (5 indivíduos).
+O experimento com CPGA utiliza quatro ilhas em anel, cada uma com uma população de 30 indivíduos. Os parâmetros são iguais aos descritos para o GA na seção anterior, com exceção do elitismo (que nesse caso é de 3 indivíduos) e da quantidade de indivíduos selecionados (5 indivíduos).
 
 \subsection{PSO e DPSO}
 
-A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
+A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.

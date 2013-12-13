@@ -456,16 +456,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="406.64954"
-     inkscape:cy="707.14816"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="382.5071"
+     inkscape:cy="864.3162"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1918"
-     inkscape:window-height="1078"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
+     inkscape:window-width="958"
+     inkscape:window-height="1062"
+     inkscape:window-x="0"
+     inkscape:window-y="16"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -475,7 +475,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -493,7 +493,7 @@
            height="41.163715"
            x="194.45436"
            y="105.84924" /></flowRegion><flowPara
-         id="flowPara3767"></flowPara></flowRoot>    <path
+         id="flowPara3767" /></flowRoot>    <path
        sodipodi:type="arc"
        style="fill:none;stroke:#000000;stroke-width:0.90954149;stroke-miterlimit:4;stroke-dasharray:none"
        id="path2985"
@@ -1057,48 +1057,50 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:21px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="87.14286"
-       y="69.505035"
-       id="text6874"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif"
+       x="150.68573"
+       y="88.792336"
+       id="text3710"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan6876"
-         x="87.14286"
-         y="69.505035">Camada</tspan><tspan
+         id="tspan3712"
+         x="150.68573"
+         y="88.792336"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Serif;-inkscape-font-specification:Serif">Camada de</tspan><tspan
          sodipodi:role="line"
-         x="87.14286"
-         y="95.755035"
-         id="tspan6888">de entrada</tspan></text>
+         x="150.68573"
+         y="118.79234"
+         id="tspan3714"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Serif;-inkscape-font-specification:Serif">entrada</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:21px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="265"
-       y="69.505035"
-       id="text6878"
+       style="font-size:24px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="371.82614"
+       y="88.792336"
+       id="text3716"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan6880"
-         x="265"
-         y="69.505035">Camada</tspan><tspan
+         id="tspan3718"
+         x="371.82614"
+         y="88.792336">Camada</tspan><tspan
          sodipodi:role="line"
-         x="265"
-         y="95.755035"
-         id="tspan6886">escondida</tspan></text>
+         x="371.82614"
+         y="118.79234"
+         id="tspan3720">escondida</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:21px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="491.42856"
-       y="69.505035"
-       id="text6882"
+       style="font-size:24px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="591.98804"
+       y="88.792336"
+       id="text3722"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan6884"
-         x="491.42856"
-         y="69.505035">Camada</tspan><tspan
+         id="tspan3724"
+         x="591.98804"
+         y="88.792336">Camada de</tspan><tspan
          sodipodi:role="line"
-         x="491.42856"
-         y="95.755035"
-         id="tspan6890">de saída</tspan></text>
+         x="591.98804"
+         y="118.79234"
+         id="tspan3728">saída</tspan></text>
   </g>
 </svg>
