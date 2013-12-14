@@ -36,6 +36,14 @@ Outro comportamento relativamente complexo é a \textbf{auto-montagem} \cite{chr
 Da observação do comportamento de diversas espécies de formigas, nota-se o uso de químicos (feromônios) para estabelecer uma forma de comunicação que permite: o recrutamento em massa de indivíduos e a formação dinâmica de um caminho para transporte do alimento para dentro da colônia.
 
 No contexto de robótica de enxame, Fujisawa et al. \cite{fujisawa2008pheromone} recria com sucesso esse comportamento em um grupo de robôs. No entanto, a síntese, armazenamento, fator de evaporação e detecção confiável dos quimícos não é nada simples e dificulta o uso prático de tal método.
-Por outro lado, diversas abordagens ao problema procuram alternativas aos feromônios, por exemplo: projeção luminosa \cite{garnier2007alice}, \textit{RFID} \cite{mamei2007rfid}, trilhas virtuais \cite{payton2001pheromone} etc.
+Por outro lado, diversas abordagens ao problema procuram alternativas aos feromônios, por exemplo: projeção luminosa \cite{garnier2007alice}, \textit{RFID}\footnote{\textit{Radio-frequency identification -- Identificação por radiofrequência.}} \cite{mamei2007rfid}, trilhas virtuais \cite{payton2001pheromone} etc.
 
-Neste trabalho focaremos no seguinte problema: recriar o comportamento de formação de caminho de forma eficiente -- entende-se menor caminho -- entre duas áreas alvo por um enxame de robôs. A posição de cada área alvo é aleatória e desconhecida pelos robôs.
+Neste trabalho focaremos no seguinte problema: recriar o comportamento de formação de caminho de forma eficiente -- entende-se menor caminho -- entre duas áreas alvo por um enxame de robôs. A posição de cada área alvo é aleatória e desconhecida pelos robôs. A Figura \ref{fig:path-formation} apresenta um exemplo de instância do problema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/path-formation}
+
+    \caption{Exemplo de instância do problema de formação de caminho com 10 robôs. As duas circunferências maiores representam as áreas alvo e as menores representam os robôs.}
+    \label{fig:path-formation}
+\end{figure}

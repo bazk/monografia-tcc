@@ -198,7 +198,7 @@
       {\large \MakeUppercase\@author}\\
       \vspace{8cm}
       {\large \textbf{\MakeUppercase\@title}}\\
-      \vspace{10cm}
+      \vspace{9cm}
       \MakeUppercase\@city\\
       \vspace{0.5cm}
       \@year

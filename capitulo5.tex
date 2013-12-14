@@ -3,12 +3,12 @@
 
 \section{Introdução}
 
-Dividimos os experimentos em duas partes: cenários de avaliação (seção \ref{sec:evaluation-scenarios}) e algoritmos evolutivos (seção \ref{sec:exp-evo-algorithms}). Na primeira, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho. Já na segunda parte, realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados.
+Dividimos os experimentos em duas partes: cenários de avaliação (Seção \ref{sec:evaluation-scenarios}) e algoritmos evolutivos (seção \ref{sec:exp-evo-algorithms}). Na primeira, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho. Já na segunda parte, realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados.
 
 \section{Cenários de avaliação}
 \label{sec:evaluation-scenarios}
 
-A cada geração (ou iteração) de algum dos algoritmos evolutivos (seção \ref{sec:evolutionary-computation}), todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da real aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses testes define um cenário de avaliação.
+A cada geração (ou iteração) de algum dos algoritmos evolutivos (Seção \ref{sec:evolutionary-computation}), todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da real aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses testes define um cenário de avaliação.
 
 Antes de mais nada, faz-se necessária a seguinte definição: seja $t_{1}$ e $t_{2}$ o centro de cada uma das duas áreas alvo, essas são simétricas em relação à origem se $t_{1}$, $t_{2}$ e a origem são colineares e a origem é equidistante de $t_{1}$ e $t_{2}$. A reta que contém $t_{1}$, $t_{2}$ e a origem é chamada eixo de simetria.
 
@@ -41,4 +41,4 @@ O experimento com CPGA utiliza quatro ilhas em anel, cada uma com uma populaçã
 
 \subsection{PSO e DPSO}
 
-A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
+A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da Equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
