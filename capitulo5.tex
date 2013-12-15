@@ -3,42 +3,97 @@
 
 \section{Introdução}
 
-Dividimos os experimentos em duas partes: cenários de avaliação (Seção \ref{sec:evaluation-scenarios}) e algoritmos evolutivos (seção \ref{sec:exp-evo-algorithms}). Na primeira, fazemos um estudo sobre cinco diferentes cenários de avaliação de \textit{fitness} e o efeito de cada para resolução do problema de formação de caminho. Já na segunda parte, realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados.
+% git
 
-\section{Cenários de avaliação}
-\label{sec:evaluation-scenarios}
+A primeira seção (Seção \ref{sec:exp-fitness}) trata de definições básicas com relação as funções de \fitness. Os experimentos em si são divididos em duas partes: comparações entre algoritmos evolutivos e comparações entre funções de \fitness. Na primeira (Seção \ref{sec:exp-comp-algorithms}), realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados. Já na segunda parte (Seção \ref{sec:exp-comp-fitness}), fazemos um estudo sobre diferentes funções de \fitness e o efeito de cada para resolução do problema de formação de caminho.
 
-A cada geração (ou iteração) de algum dos algoritmos evolutivos (Seção \ref{sec:evolutionary-computation}), todos os indivíduos (ou partículas) são testados no simulador por um intervalo de tempo $T$ = 10 minutos ($T_{A}$ = 1 minuto e $T_{B}$ = 9 minutos). Porém, devido a aleatoriedade das posições inicias de cada robô em cada teste, o resultado (\textit{fitness}) de uma única avaliação pode não ser representativo da real aptidão daquele indivíduo à resolução do problema. Por esse motivo, a \textit{fitness} de um indivíduo é dada pela média obtida em vários testes com configurações específicas. O conjunto desses testes define um cenário de avaliação.
 
-Antes de mais nada, faz-se necessária a seguinte definição: seja $t_{1}$ e $t_{2}$ o centro de cada uma das duas áreas alvo, essas são simétricas em relação à origem se $t_{1}$, $t_{2}$ e a origem são colineares e a origem é equidistante de $t_{1}$ e $t_{2}$. A reta que contém $t_{1}$, $t_{2}$ e a origem é chamada eixo de simetria.
+\section{Funções de \fitness}
+\label{sec:exp-fitness}
 
-O primeiro cenário denomina-se \textit{Non-Symmetrical Random} (NSR) e consiste de 16 testes onde, em cada um, as áreas alvo tem posição aleatória e não são necessariamente simétricas em relação a origem. Observe que a distância entre as áreas alvo é limitada ao intervalo $[0,8..1,4]$. Esse cenário representa exatamente a instância do problema que estamos tentando resolver (formação de caminho).
+Para qualquer problema resolvido por um algoritmo evolutivo, a função de \fitness ideal deve ser determinística. É fácil perceber que uma função de \fitness muito distante desse ideal pode ocasionar o descarte de boas soluções pelo algoritmo que a utiliza. Por exemplo, suponha que em um determinado momento na execução de um algoritmo genético -- cuja função de \fitness não é determinística -- dois indivíduo foram avaliados e um deles é de maior \fitness que o outro. Consequentemente, o algoritmo decide selecionar um dos indivíduos para reprodução e o outro é descartado. Devido ao não determinismo da função de \fitness, é possível que numa segunda avaliação dos mesmos indivíduos o que foi descartado tenha maior \fitness que aquele que foi selecionado. Logo, para obter bom desempenho em um algoritmo evolutivo, a função de \fitness escolhida deve ser determinística ou o mais próximo disso possível.
 
-O cenário \textit{Symmetrical Random} (SR) é semelhante ao NSR porém a posição das áreas alvo é simétrica em relação a origem.
+A função de \fitness demonstrada na Seção \ref{sec:fitness} (Função de \fitness Simples -- FFS) representa fielmente a instância do problema a ser resolvido, no entanto não é determinística por dois grandes fatores aleatórios: posição das áreas alvo e posição inicial dos robôs.
 
-O cenário \textit{Variable Distances} (VD) compõe-se testes onde o angulo formado pelo eixo de simetria e o eixo das abscissas é fixado em $135^{\circ}$ e a distância entre as áreas alvo (em metros) é escolhida do conjunto $D = \{0,8; 1,0; 1,2; 1,4\}$. Executa-se 4 testes para cada distância do conjunto $D$, totalizando 16 testes.
+Para resolver esse problema, derivam-se outras duas funções de \fitness: Função de \fitness Média (FFM), Função de \fitness Classificada (FFC).
 
-Os testes que compõe o cenário \textit{Variable Axis} (VA) tem áreas alvo com distância fixa em 1,2 metros e o conjunto $A = \{0; 45; 90; 135\}$ determina o ângulo (em graus) formado pelo eixo de simetria e o eixo das abscissas. Nesse também executa-se 4 testes para cada ângulo do conjunto $A$, também totalizando 16 testes.
+\subsection{Função de \fitness Média}
 
-Unindo os cenários VD e VA, o cenário \textit{Variable Distances and Axis} (VDA) determina as distâncias e ângulos das áreas alvo a partir dos conjuntos $D$ e $A$. Executa-se um teste para cada combinação de uma distância de $D$ com um ângulo de $A$.
+Calcula-se a $k$-FFM de um indivíduo $i$ pela média de $k$ avaliações independentes da função de \fitness simples, como visto na Equação \ref{eq:ffm}. Quanto maior o número de avaliações ($k$), mais próxima do ideal (função determinística) é a função. No entanto, essa metodologia é limitada já que o custo computacional é diretamente proporcional ao número de avaliações.
 
-Em todos os cenários, a posição inicial dos robôs em cada teste é aleatória.
+\begin{equation}
+\label{eq:ffm}
+k\text{-FFM} (i) = \frac{1}{k} \sum^{k} \text{FFS} (i)
+\end{equation}
 
-\section{Parâmetros e operadores dos algoritmos evolutivos}
-\label{sec:exp-evo-algorithms}
+Lembrando que $k$-FFM e FFS não são funções determinísticas.
 
-Antes de mais nada, é necessário determinar como será feita a representação dos parâmetros da rede neural. No PSO, uma solução é representada por um vetor de valores contínuos (vetor posição), nesse caso a representação é direta e cada elemento do vetor equivale á um parâmetro (um peso, \textit{bias} ou \textit{time constraint}).
+\subsection{Função de \fitness Classificada}
 
-Os outros três algoritmos representam soluções como valores discretos, portanto os parâmetros são discretizados uniformemente em 256 valores no intervalo $[0, 256)$. No caso do GA e do CGPGA, estes valores discretos são concatenados formando uma string de bits.
+Antes de mais nada, denota-se por FFS$_{a,d}^{*}$ a função de \fitness simples onde a simulação executada para seu cálculo contém as seguintes limitações:
 
-\subsection{GA}
+\begin{enumerate}
+    \item A posição das áreas alvo é obrigatoriamente simétrica em relação à origem. Ou seja, a origem do sistema é colinear e equidistante em relação às áreas alvo.
+    \item O ângulo (em graus) formado pelo eixo das abscissas e uma das áreas alvo é $a$.
+    \item A distância (em metros) entre as áreas alvo é $d$.
+\end{enumerate}
+
+Desse modo, a $k$-FFC$_{A,D}$ de um indivíduo $i$ é computada pela média de avaliação da FFS$_{a,d}^{*}$, $k$ vezes para cada combinação de $a \in A$ e $d \in D$ (Equação \ref{eq:ffc}). Como as posições das áreas alvo não são mais aleatórias (as posições dos robôs ainda é aleatória), essa função é ainda mais próxima do ideal.
+
+\begin{equation}
+\label{eq:ffc}
+k\text{-FFC}_{A,D} (i) = \frac{1}{k |A| |D|} \sum^{k} \sum_{a \in A} \sum_{d \in D} \text{FFS}_{a,d}^{*} (i)
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Comparações entre funções de \fitness}
+\label{sec:exp-comp-fitness}
+
+Algumas instâncias das funções apresentadas na Seção \ref{sec:exp-fitness} são comparadas e analisadas nos experimentos. A primeira das instâncias é denotada por \textbf{f1} e consiste de uma 16-FFM. A função identificada por \textbf{f2} equivale a uma 1-FFC$_{A,D}$ onde $A = \{0; 45; 90; 135\}$ e $D = \{0,8; 1,0; 1,2; 1,4\}$. A terceira, \textbf{f3}, é a uma 4-FFC$_{A,D}$ onde $A = \{0; 45; 90; 135\}$ e $D = \{1,2\}$. E por fim, a \textbf{f4} também equivale a uma 4-FFC$_{A,D}$ onde $D = \{0,8; 1,0; 1,2; 1,4\}$ e $A = \{135\}$. Essas funções também podem ser vistas na Tabela \ref{tab:fitness-functions}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        Instância & Função & A & D \\ \hline
+        \textbf{f1} & 16-FFM & -- & -- \\ \hline
+        \textbf{f2} & 1-FFC$_{A,D}$ & $\{0; 45; 90; 135\}$ & $\{0,8; 1,0; 1,2; 1,4\}$ \\ \hline
+        \textbf{f3} & 4-FFC$_{A,D}$ & $\{0; 45; 90; 135\}$ & $\{1,2\}$ \\ \hline
+        \textbf{f4} & 4-FFC$_{A,D}$ & $\{135\}$ & $\{0,8; 1,0; 1,2; 1,4\}$ \\ \hline
+    \end{tabular}
+    \caption{Instâncias das funções de \fitness}
+    \label{tab:fitness-functions}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Comparações entre algoritmos evolutivos}
+\label{sec:exp-comp-algorithms}
+
+Considerando que as funções de \fitness são bastante semelhantes, é suficiente a utilização de apenas uma delas a fim de comparar diferentes algoritmos. Os experimentos desta seção utilizam apenas a função de \fitness \textbf{f3}.
+
+Os algoritmos evolutivos comparados são: \textit{Genetic Algorithm} (GA), \textit{Coarse-Crained Parallel Genetic Algorithm} (CGPGA), \textit{Particle Swarm Optimization} (PSO) e \textit{Discrete Particle Swarm Optimization}.
+
+\subsection{\textit{Genetic Algorithm}}
+
+A representação da solução no GA é através de uma string de bits. Os parâmetros da solução são discretizados uniformemente em valores no intervalo $[0, 256)$ e codificados em 8 bits. A concatenação dos parâmetros codificados representa um indivíduo.
 
 O algoritmo inicia com uma uma população de 120 indivíduos gerados aleatoriamente e executa por 500 gerações. A cada geração 20 indivíduos são selecionados pelo método da roleta russa e aplicam os operadores de cruzamento e mutação gerando uma nova população (cada indivíduo selecionado gera 6 novos indivíduos). Os seis melhores indivíduos são mantidos na nova população (elitismo). A estrategia de cruzamento é a de ponto único e ocorre a uma taxa de 70\%. A inversão de cada um dos \textit{bits} dos cromossomos acontece com 3\% de probabilidade (mutação).
 
-\subsection{CGPGA}
+\subsection{\textit{Coarse-Grained Parallel Genetic Algorithm}}
 
-O experimento com CPGA utiliza quatro ilhas em anel, cada uma com uma população de 30 indivíduos. Os parâmetros são iguais aos descritos para o GA na seção anterior, com exceção do elitismo (que nesse caso é de 3 indivíduos) e da quantidade de indivíduos selecionados (5 indivíduos).
+Os experimentos com CGPGA utilizam quatro ilhas em anel, cada uma com uma população de 30 indivíduos. A representação da solução e os parâmetros são iguais aos descritos para o GA na seção anterior, com exceção do elitismo (que nesse caso é de 3 indivíduos) e da quantidade de indivíduos selecionados (5 indivíduos).
 
-\subsection{PSO e DPSO}
+A execução é análoga a do GA porém com quatro instâncias (ilhas) acontecendo ao mesmo tempo. A cada 10 gerações, 5\% dos indivíduos de cada ilha são migrados para a ilha seguinte (topologia em anel).
 
-A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da Equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
+\subsection{\textit{Particle Swarm Optimization}}
+
+No PSO, uma solução é representada por um vetor de valores contínuos (vetor posição), nesse caso a representação da solução é direta e cada elemento do vetor equivale á um parâmetro da solução. A população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da Equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
+
+\subsection{\textit{Discrete Particle Swarm Optimization}}
+
+O vetor posição no DPSO está contido num espaço discreto. Portanto, os parâmetros da solução são discretizados uniformemente em valores no intervalo $[0, 256)$ e cada elemento do vetor posição representa um parâmetro da solução. Igualmente ao PSO, a população de partículas é iniciada com 120 indivíduos e executa 500 iterações. Os parâmetros $\omega$, $\alpha$ e $\beta$ da Equação \ref{eq:pso-vel} escolhidos para os experimentos são 0.9, 2.0 e 2.0, respectivamente.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

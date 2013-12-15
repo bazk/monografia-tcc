@@ -5,7 +5,7 @@
 
 Como Sperati et al. [\cite{sperati2011path}], abordamos o problema de formação de caminho utilizando robótica evolutiva. Cada robô é controlado por uma \textit{Time-Delay Neural Network} (Seção \ref{sec:tdnn}) e seus parâmetros são ajustados por algoritmos evolutivos (Seção \ref{sec:evolutionary-computation}).
 
-A Seção \ref{sec:robots} descreve o robô utilizado para os estudos. A Seção \ref{sec:environment} descreve o ambiente a que esses robôs são submetidos. A Seção \ref{sec:fitness} define a função de \textit{fitness} que avalia a qualidade de uma solução para a instância do problema em questão. Por fim, a Seção \ref{sec:simulation} apresenta o ambiente de simulação desenvolvido e a motivação para tal feito.
+A Seção \ref{sec:robots} descreve o robô utilizado para os estudos. A Seção \ref{sec:environment} descreve o ambiente a que esses robôs são submetidos. A Seção \ref{sec:fitness} define a função de \fitness que avalia a qualidade de uma solução para a instância do problema em questão. Por fim, a Seção \ref{sec:simulation} apresenta o ambiente de simulação desenvolvido e a motivação para tal feito.
 
 \section{Os robôs}
 \label{sec:robots}
@@ -41,10 +41,10 @@ O parâmetro denominado \textit{time constraint} ($\tau_{j}$) determina a fraç�
 
 Os robôs são colocados em um espaço quadrado (250 cm de lado) delimitado por paredes. Dentro desse espaço, duas circunferências (16 cm de raio), denotadas por uma coloração escura (em contraste ao restante do espaço que apresenta coloração mais clara), representam as áreas alvo. O sensor de luz infravermelha localizado em baixo do robô é sensível à diferença de coloração, podendo assim perceber se está sobre uma área alvo ou não. Adicionalmente, no centro das áreas alvo, dois LEDs vermelhos sempre acessos são visíveis, indistinguivelmente, como os LEDs na traseira dos robôs.
 
-\section{A função de \textit{fitness}}
+\section{A função de \fitness}
 \label{sec:fitness}
 
-Seguindo o mesmo conceito apresentado por Sperati et al. \cite{sperati2011path}, a \textit{fitness} $F$ de uma solução $S$ é computada a partir de um teste com os robôs no ambiente físico por um determinado intervalo de tempo $T$. Dividimos esse intervalo em duas partes $T_{a}$ e $T_{b}$. Durante a primeira parte, a \textit{fitness} não é avaliada. A avaliação só começa a acontecer durante a segunda parte do teste.
+Seguindo o mesmo conceito apresentado por Sperati et al. \cite{sperati2011path}, a \fitness $F$ de uma solução $S$ é computada a partir de um teste com os robôs no ambiente físico por um determinado intervalo de tempo $T$. Dividimos esse intervalo em duas partes $T_{a}$ e $T_{b}$. Durante a primeira parte, a \fitness não é avaliada. A avaliação só começa a acontecer durante a segunda parte do teste.
 
 No início do teste, cada robô $i$ ganha um valor virtual de energia $e_{i} = 2$. A função $\delta$ aproxima o consumo de energia a fim de que um robô, a máxima velocidade, consuma exatamente uma unidade de energia para mover-se de uma área alvo à outra.
 
@@ -59,14 +59,14 @@ Na sequência, os seguintes passos são executados:
 \begin{enumerate}
     \item A solução $S$ é aplicada ao enxame de robôs.
     \item Prepara-se o ambiente de testes, ou seja, as áreas alvo e os robôs são colocados em posições aleatórias dentro do ambiente.
-    \item Os robôs são ligados e estão livres para mover-se dentro do ambiente sem afetar a \textit{fitness} durante a primeira parte do teste ($T_{a}$).
+    \item Os robôs são ligados e estão livres para mover-se dentro do ambiente sem afetar a \fitness durante a primeira parte do teste ($T_{a}$).
     \item Em seguida, inicia-se a segunda parte do teste ($T_{b}$) em que os robôs passam a ser avaliados da seguinte maneira:
     \begin{enumerate}
         \item A cada instante $t$, a energia de cada é robô é decrementada de $\delta (t)$.
-        \item Se um robô entrar em uma área alvo, a energia restante é acrescida na \textit{fitness} individual e a energia volta a ser definida em 2.
+        \item Se um robô entrar em uma área alvo, a energia restante é acrescida na \fitness individual e a energia volta a ser definida em 2.
     \end{enumerate}
-    \item A \textit{fitness} individual é normalizada em relação ao máximo de viagens entre uma área alvo e outra que um robô poderia desempenhar (solução ótima).
-    \item Finalmente, a \textit{fitness} do enxame é computada pela média de \textit{fitness} dos indivíduos que a compõe.
+    \item A \fitness individual é normalizada em relação ao máximo de viagens entre uma área alvo e outra que um robô poderia desempenhar (solução ótima).
+    \item Finalmente, a \fitness do enxame é computada pela média de \fitness dos indivíduos que a compõe.
 \end{enumerate}
 
 Matematicamente,
@@ -98,12 +98,12 @@ f_{max} = \frac{2 \omega_{M} r T_{b}}{d}
 $$
 \end{minipage}\\
 
-Assim, um robô que se move de uma área alvo a outra da maneira mais eficiente -- pelo menor caminho e a máxima velocidade -- mantêm exatamente uma unidade de energia toda vez que entrar em uma área alvo. Por consequência, sua \textit{fitness} individual será máxima (um) e, se todos os indivíduos apresentarem o mesmo comportamento, a \textit{fitness} do enxame também será máxima.
+Assim, um robô que se move de uma área alvo a outra da maneira mais eficiente -- pelo menor caminho e a máxima velocidade -- mantêm exatamente uma unidade de energia toda vez que entrar em uma área alvo. Por consequência, sua \fitness individual será máxima (um) e, se todos os indivíduos apresentarem o mesmo comportamento, a \fitness do enxame também será máxima.
 
 \section{O ambiente de simulação}
 \label{sec:simulation}
 
-Os algoritmos evolutivos utilizados na fase de treinamento necessitam de múltiplas avaliações da função de \textit{fitness} (na ordem das dezenas de milhar). Por esse motivo, a utilização de robôs reais em um ambiente físico é, apesar de possível, impraticável visto o tempo demandado por tal método. Além disso, não temos a disposição o número necessário de robôs para a realização dos experimentos. Assim, surge naturalmente a necessidade de um ambiente de simulação virtual que imite com fidelidade os robôs e o ambiente à que estes serão submetidos. Após o treinamento no ambiente simulado, a solução resultante -- parâmetros da rede neural -- poderá ser aplicada a um conjunto de robôs e esses demonstrarão o comportamento esperado.
+Os algoritmos evolutivos utilizados na fase de treinamento necessitam de múltiplas avaliações da função de \fitness (na ordem das dezenas de milhar). Por esse motivo, a utilização de robôs reais em um ambiente físico é, apesar de possível, impraticável visto o tempo demandado por tal método. Além disso, não temos a disposição o número necessário de robôs para a realização dos experimentos. Assim, surge naturalmente a necessidade de um ambiente de simulação virtual que imite com fidelidade os robôs e o ambiente à que estes serão submetidos. Após o treinamento no ambiente simulado, a solução resultante -- parâmetros da rede neural -- poderá ser aplicada a um conjunto de robôs e esses demonstrarão o comportamento esperado.
 
 O modelo mais comum de simulação baseia-se na aplicação de mecânica Newtoniana, porém Miglino et al. \cite{miglino1996evolving} aponta algumas dificuldades que podem ser encontradas com este tipo de simulador na fase de treinamento:
 \begin{enumerate}
@@ -116,8 +116,8 @@ Estas dificuldades podem impedir a transição entre o ambiente de treinamento e
 
 Em seguida, Miglino et al. \cite{miglino1996evolving} propõe um modelo de simulação baseado em amostragem. Utilizando um robô no ambiente real, constrói-se uma tabela contendo amostragens do deslocamento linear e angular para diferentes valores aplicados aos atuadores. A partir daí, no simulador, as fórmulas de física clássica são substituídas por simples consultas nesta tabela. De forma análoga, os sensores do robô são amostrados para cada uma das diferentes classes de obstáculos presentes no ambiente.
 
-Além disso, para aproveitar os recursos computacionais disponíveis, a simulação para o cálculo da função de \textit{fitness} é executada para todos os indivíduos da população de forma paralela pelo uso da plataforma \textit{OpenCL} \cite{amd2012amdaccelerated}. Essa plataforma fornece uma abstração de processamento e arquitetura de memória para desenvolvimento de programas que executam em diversos dispositivos como: \textit{central processing units} (CPUs), \textit{graphics processing units} (GPUs), \textit{digital signal processors} (DSPs) etc.
+Além disso, para aproveitar os recursos computacionais disponíveis, a simulação para o cálculo da função de \fitness é executada para todos os indivíduos da população de forma paralela pelo uso da plataforma \textit{OpenCL} \cite{amd2012amdaccelerated}. Essa plataforma fornece uma abstração de processamento e arquitetura de memória para desenvolvimento de programas que executam em diversos dispositivos como: \textit{central processing units} (CPUs), \textit{graphics processing units} (GPUs), \textit{digital signal processors} (DSPs) etc.
 
 O modelo de programação \textit{Data-Parallel} é o foco primário da plataforma e tem como principal finalidade o desenvolvimento de programas para execução em GPGPUs\footnote{\textit{General Purpouse Graphics Processing Units} -- Unidades de processamento gráfico de propósito geral.}. Diferentemente do modelo padrão de programação em CPUs onde um instrução opera sobre um único item de dados (\textit{work-item}), no modelo \textit{Data-Parallel} cada instrução é executada paralelamente para um conjunto de dados (\textit{work-group}).
 
-Assim, cada robô simulado corresponde a um \textit{work-item} e o conjunto de robôs pertences a um ambiente a um \textit{work-group}. A simulação e o cálculo da função de \textit{fitness} ocorre em paralelo para todos os robôs.
+Assim, cada robô simulado corresponde a um \textit{work-item} e o conjunto de robôs pertences a um ambiente a um \textit{work-group}. A simulação e o cálculo da função de \fitness ocorre em paralelo para todos os robôs.

@@ -11,12 +11,11 @@
 \usepackage{ps-macros}
 \usepackage[linktocpage=true]{hyperref}
 \usepackage{makeidx}
-% \usepackage{caption2}
 \usepackage{caption}
 \usepackage{subcaption}
-
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{xspace}
 
 \floatname{algorithm}{Algoritmo}
 \renewcommand\algorithmicend{\textbf{fim}}
@@ -52,6 +51,9 @@
 \makeindex
 
 \begin{document}
+
+\newcommand{\fitness}{\textit{fitness}\xspace}
+\newcommand{\fitnessp}{\textit{fitness}\xspace} % plural
 
 \pdfstringdefDisableCommands{%
     \let\MakeUppercase\relax
