@@ -3,34 +3,34 @@
 
 \section{Introdução}
 
-% git
+Todos os experimentos detalhados neste capítulo foram executados em um computador com um processador ``AMD FX(tm)-8120 Eight-Core Processor'' de 3,1 GHz, 8 GiB de memória e placa gráfica ``AMD Radeon HD 7800 Series''. O simulador e os algoritmos implementados para este trabalho, escritos na linguagem de programação Python e C (OpenCL), estão disponíveis como software livre sob a licença GNU GPLv3 em \url{https://github.com/eburatti09/srs2d}.
 
-A primeira seção (Seção \ref{sec:exp-fitness}) trata de definições básicas com relação as funções de \fitness. Os experimentos em si são divididos em duas partes: comparações entre algoritmos evolutivos e comparações entre funções de \fitness. Na primeira (Seção \ref{sec:exp-comp-algorithms}), realizamos comparações entre quatro algoritmos evolutivos estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados. Já na segunda parte (Seção \ref{sec:exp-comp-fitness}), fazemos um estudo sobre diferentes funções de \fitness e o efeito de cada para resolução do problema de formação de caminho.
+A primeira seção (Seção \ref{sec:exp-fitness}) trata de definições básicas com relação as funções de \fitness. Os experimentos em si são divididos em duas partes: comparações entre funções de \fitness e comparações entre algoritmos de treinamento. Na primeira (Seção \ref{sec:exp-comp-fitness}), fazemos um estudo sobre diferentes funções de \fitness e o efeito de cada para resolução do problema de formação de caminho. Já na segunda parte (Seção \ref{sec:exp-comp-algorithms}), realizamos comparações entre quatro algoritmos de treinamento estudados (GA, CGPGA, PSO, DPSO) a fim de escolher o mais apto a produzir bons resultados.
 
 
 \section{Funções de \fitness}
 \label{sec:exp-fitness}
 
-Para qualquer problema resolvido por um algoritmo evolutivo, a função de \fitness ideal deve ser determinística. É fácil perceber que uma função de \fitness muito distante desse ideal pode ocasionar o descarte de boas soluções pelo algoritmo que a utiliza. Por exemplo, suponha que em um determinado momento na execução de um algoritmo genético -- cuja função de \fitness não é determinística -- dois indivíduo foram avaliados e um deles é de maior \fitness que o outro. Consequentemente, o algoritmo decide selecionar um dos indivíduos para reprodução e o outro é descartado. Devido ao não determinismo da função de \fitness, é possível que numa segunda avaliação dos mesmos indivíduos o que foi descartado tenha maior \fitness que aquele que foi selecionado. Logo, para obter bom desempenho em um algoritmo evolutivo, a função de \fitness escolhida deve ser determinística ou o mais próximo disso possível.
+Para qualquer problema resolvido por um algoritmo evolutivo (ou iterativo), a função de \fitness ideal deve ser determinística. É fácil perceber que uma função de \fitness muito distante desse ideal pode ocasionar o descarte de boas soluções pelo algoritmo que a utiliza. Por exemplo, suponha que em um determinado momento na execução de um algoritmo genético -- cuja função de \fitness não é determinística -- dois indivíduo foram avaliados e um deles é de maior \fitness que o outro. Consequentemente, o algoritmo decide selecionar um dos indivíduos para reprodução e o outro é descartado. Devido ao não determinismo da função de \fitness, é possível que numa segunda avaliação dos mesmos indivíduos o que foi descartado tenha maior \fitness que aquele que foi selecionado. Logo, para obter bom desempenho em um algoritmo evolutivo, a função de \fitness escolhida deve ser determinística ou o mais próximo disso possível.
 
-A função de \fitness demonstrada na Seção \ref{sec:fitness} (Função de \fitness Simples -- FFS) representa fielmente a instância do problema a ser resolvido, no entanto não é determinística por dois grandes fatores aleatórios: posição das áreas alvo e posição inicial dos robôs.
+A função de \fitness F demonstrada na Seção \ref{sec:fitness} é capaz de avaliar o desempenho do enxame na solução do problema, no entanto não é determinística por dois grandes fatores aleatórios: posição das áreas alvo e posição inicial dos robôs.
 
 Para resolver esse problema, derivam-se outras duas funções de \fitness: Função de \fitness Média (FFM), Função de \fitness Classificada (FFC).
 
 \subsection{Função de \fitness Média}
 
-Calcula-se a $k$-FFM de um indivíduo $i$ pela média de $k$ avaliações independentes da função de \fitness simples, como visto na Equação \ref{eq:ffm}. Quanto maior o número de avaliações ($k$), mais próxima do ideal (função determinística) é a função. No entanto, essa metodologia é limitada já que o custo computacional é diretamente proporcional ao número de avaliações.
+Calcula-se a $k$-FFM de um indivíduo $i$ pela média de $k$ avaliações independentes da função de \fitness F, como visto na Equação \ref{eq:ffm}. Quanto maior o número de avaliações ($k$), mais próxima do ideal (função determinística) é a função. No entanto, essa metodologia é limitada já que o custo computacional é diretamente proporcional ao número de avaliações.
 
 \begin{equation}
 \label{eq:ffm}
-k\text{-FFM} (i) = \frac{1}{k} \sum^{k} \text{FFS} (i)
+k\text{-FFM} (i) = \frac{1}{k} \sum^{k} \text{F} (i)
 \end{equation}
 
-Lembrando que $k$-FFM e FFS não são funções determinísticas.
+Lembrando que as funções $k$-FFM e F não são funções determinísticas.
 
 \subsection{Função de \fitness Classificada}
 
-Antes de mais nada, denota-se por FFS$_{a,d}^{*}$ a função de \fitness simples onde a simulação executada para seu cálculo contém as seguintes limitações:
+Antes de mais nada, denota-se por F$_{a,d}^{*}$ uma função de \fitness semelhante a F, no entanto a simulação executada para seu cálculo contém as seguintes limitações:
 
 \begin{enumerate}
     \item A posição das áreas alvo é obrigatoriamente simétrica em relação à origem. Ou seja, a origem do sistema é colinear e equidistante em relação às áreas alvo.
@@ -38,11 +38,11 @@ Antes de mais nada, denota-se por FFS$_{a,d}^{*}$ a função de \fitness simples
     \item A distância (em metros) entre as áreas alvo é $d$.
 \end{enumerate}
 
-Desse modo, a $k$-FFC$_{A,D}$ de um indivíduo $i$ é computada pela média de avaliação da FFS$_{a,d}^{*}$, $k$ vezes para cada combinação de $a \in A$ e $d \in D$ (Equação \ref{eq:ffc}). Como as posições das áreas alvo não são mais aleatórias (as posições dos robôs ainda é aleatória), essa função é ainda mais próxima do ideal.
+Desse modo, a $k$-FFC$_{A,D}$ de um indivíduo $i$ é computada pela média de avaliação da F$_{a,d}^{*}$, $k$ vezes para cada combinação de $a \in A$ e $d \in D$ (Equação \ref{eq:ffc}). Como as posições das áreas alvo não são mais aleatórias (as posições dos robôs ainda é aleatória), essa função é ainda mais próxima do ideal.
 
 \begin{equation}
 \label{eq:ffc}
-k\text{-FFC}_{A,D} (i) = \frac{1}{k |A| |D|} \sum^{k} \sum_{a \in A} \sum_{d \in D} \text{FFS}_{a,d}^{*} (i)
+k\text{-FFC}_{A,D} (i) = \frac{1}{k |A| |D|} \sum^{k} \sum_{a \in A} \sum_{d \in D} \text{F}_{a,d}^{*} (i)
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,12 +68,12 @@ Algumas instâncias das funções apresentadas na Seção \ref{sec:exp-fitness} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Comparações entre algoritmos evolutivos}
+\section{Comparações entre algoritmos de treinamento}
 \label{sec:exp-comp-algorithms}
 
 Considerando que as funções de \fitness são bastante semelhantes, é suficiente a utilização de apenas uma delas a fim de comparar diferentes algoritmos. Os experimentos desta seção utilizam apenas a função de \fitness \textbf{f3}.
 
-Os algoritmos evolutivos comparados são: \textit{Genetic Algorithm} (GA), \textit{Coarse-Crained Parallel Genetic Algorithm} (CGPGA), \textit{Particle Swarm Optimization} (PSO) e \textit{Discrete Particle Swarm Optimization}.
+Os algoritmos de treinamento comparados são: \textit{Genetic Algorithm} (GA), \textit{Coarse-Crained Parallel Genetic Algorithm} (CGPGA), \textit{Particle Swarm Optimization} (PSO) e \textit{Discrete Particle Swarm Optimization}.
 
 \subsection{\textit{Genetic Algorithm}}
 

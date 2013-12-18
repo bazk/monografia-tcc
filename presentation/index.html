@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google IO 2012</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/app.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide class="logoslide nobackground">
+  <article class="flexbox vcenter">
+    <!-- <span><img src="images/google_developers_logo.png"></span> -->
+  </article>
+</slide>
+
+<slide class="title-slide fill nobackground" style="background: url('images/swarm-bots.jpg')">
+  <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+  <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+  <hgroup class="auto-fadein">
+    <h1 data-config-title class="white shadow"><!-- populated from slide_config.json --></h1>
+    <h2 data-config-subtitle class="white"><!-- populated from slide_config.json --></h2>
+    <p data-config-presenter class="white"><!-- populated from slide_config.json --></p>
+  </hgroup>
+</slide>
+
+
+<slide class="big" >
+  
+    <hgroup>
+      <h2>Introdução</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul class="build fade">
+<li>Robótica de enxame</li>
+<li>Robótica evolutiva</li>
+<li>Contorno do problema e o ambiente de simulação</li>
+<li>Experimentos e resultados</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Robótica de enxame</h2>
+      <h3><i style="font-style: italic;">Swarm robotics</i></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Inspiração</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p>Grupos de indivíduos simples para realização de tarefas complexas</p>
+<p><img alt="Enxame de formigas" src="images/swarm-ants-reduced.jpg" /> <img alt="Enxame de robôs" src="images/swarm-scape-reduced.jpg" /></p>
+<p>Uma colônia pode ser vista como um único super-organismo</p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Motivação</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul class="build">
+<li>Flexibilidade</li>
+<li>Robustez</li>
+<li>Descentralização</li>
+<li>Auto-organização</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Classificação</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>Movimento coletivo (<i style="font-style: italic;">formation, flocking</i>)</li>
+<li>Busca por alimento</li>
+<li>Transporte coletivo
+<li class="highlight">Formação de caminho</li>
+<li>etc.</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Robótica evolutiva</h2>
+      <h3><i style="font-style: italic;">Evolutionary robotics</i></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Robótica evolutiva</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p>Síntese de controladores para robôs com uso de algoritmos evolutivos</p>
+<p><br></p>
+<p>Representação do controlador:</p>
+<ul>
+<li>Programas em linguagem de alto nível (programação genética)
+<li class="highlight">Redes neurais artificias</li>
+<li>Lógica difusa</li>
+<li>etc.</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Algoritmos</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li><i style="font-style: italic;">Genetic Algorithm</i> (GA)</li>
+<li><i style="font-style: italic;">Coarse-Grained Parallel Genetic Algorithm</i> (CGPGA)</li>
+<li><i style="font-style: italic;">Particle Swarm Optimization</i> (PSO)</li>
+<li><i style="font-style: italic;">Discrete Particle Swarm Optimization</i> (DPSO)</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Contorno do problema e o ambiente de simulação</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>O robô</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="o robô e-puck" src="images/epuck-big.jpg" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>O ambiente</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="o ambiente" src="images/path-formation.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>A função de <i style="font-style: italic;">fitness</i></h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="função de fitness" src="images/fitness.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>O simulador</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><h2>500 x 120 x 16 x 10 min = 9.600.000 min</h2></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>O simulador</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><h2>No simulador com OpenCL: 300 min</h2></article>
+ 
+</slide>
+
+<slide class="segue dark nobackground" >
+  
+    <!-- <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>Experimentos e resultados</h2>
+      <h3></h3>
+    </hgroup>
+  
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comportamento observado</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><a href="http://solace.eburatti.org">Link para os experimentos</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comparações entre funções de <i style="font-style: italic;">fitness</i></h2>
+      <h3></h3>
+    </hgroup>
+    <article ><table>
+    <tr><th>Instância</th><th>Função</th><th>A (eixos)</th><th>D (distâncias)</th></tr>
+    <tr><td><b>f1</b></td><td>16-FFM</td><td>-</td><td>-</td></tr>
+    <tr><td><b>f2</b></td><td>1-FFC</td><td>{0; 45; 90; 135}</td><td>{0, 8; 1, 0; 1, 2; 1, 4}</td></tr>
+    <tr><td><b>f3</b></td><td>4-FFC</td><td>{0; 45; 90; 135}</td><td>{1, 2}</td></tr>
+    <tr><td><b>f4</b></td><td>4-FFC</td><td>{1, 2}</td><td>{0, 8; 1, 0; 1, 2; 1, 4}</td></tr>
+</table></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comparações entre funções de <i style="font-style: italic;">fitness</i></h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="f1" src="charts/fitness-f1.png" /> <img alt="f2" src="charts/fitness-f2.png" /></p>
+<p><img alt="f3" src="charts/fitness-f3.png" /> <img alt="f4" src="charts/fitness-f4.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comparações entre funções de <i style="font-style: italic;">fitness</i></h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="reeval" src="charts/reeval.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comparações entre algoritmos de treinamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="compare" src="charts/compare.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Comparações entre algoritmos de treinamento</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="GA" src="charts/fitness-GA.png" /> <img alt="CGPGA" src="charts/fitness-CGPGA.png" /></p>
+<p><img alt="PSO" src="charts/fitness-PSO.png" /> <img alt="DPSO" src="charts/fitness-DPSO.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Ajuste de parâmetros</h2>
+      <h3></h3>
+    </hgroup>
+    <article class="flexbox vcenter"><p><img alt="mutation" src="charts/mutation.png" /> <img alt="elitism" src="charts/elitism.png" /></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Trabalhos futuros</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>
+<p>Análise outras topologias de vizinhança para o PSO</p>
+</li>
+<li>
+<p>Experimentação com outras redes neurais, em especial as auto-organizáveis</p>
+</li>
+</ul></article>
+ 
+</slide>
+
+
+ <!-- <slide class="thank-you-slide segue nobackground">
+  <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>&lt;Thank You!&gt;</h2>
+    <p>Important contact information goes here.</p>
+  </article>
+  <p class="auto-fadein" data-config-contact>
+  </p>
+</slide> -->
+
+<slide class="logoslide dark nobackground">
+  <article class="flexbox vcenter">
+    <!-- <span><img src="images/google_developers_logo_white.png"></span> -->
+  </article>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

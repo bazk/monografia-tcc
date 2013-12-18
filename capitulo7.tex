@@ -1,2 +1,12 @@
 \chapter{Conclusão}
-\label{conclusao}
+\label{cha:conclusion}
+
+Este trabalho apresentou uma abordagem que parte da robótica evolutiva para reproduzir o comportamento de formação de caminho no contexto da robótica de enxame. Um simulador e alguns algoritmos de treinamento foram implementados para estudo e análise de diversas estratégias na tentativa de aprimorar as soluções encontradas para a execução de tal comportamento coletivo.
+
+Para melhor utilização dos recursos computacionais disponíveis, o simulador foi desenvolvido utilizando a plataforma \textit{OpenCL}, permitindo a execução paralela em CPUs e GPUs, o que resultou em uma redução considerável no tempo necessário para cada experimento. De outra forma não seria possível realizar a análise experimental deste trabalho em tempo hábil.
+
+A partir da análise dos resultados, verificou-se que o não determinismo da função de \fitness degrada o desempenho de um algoritmo evolutivo. Assim, na fase de treinamento, a transformação dessa função a fim de reduzir fatores aleatórios -- e aproximá-la de uma função determinística -- de fato resulta em melhor desempenho. No entanto, deve ser feita com cuidado visto que o treinamento pode explorar alguma característica exposta pela transformação que não estará presente no ambiente real.
+
+Dentre os algoritmos de treinamento estudados (GA, CGPGA, PSO e DPSO), o GA com elitismo apresentou o melhor resultado. Para esse problema, a modelagem em ilhas do CGPGA não contribuiu na evolução da solução.
+
+Em trabalhos futuros, cabe uma análise do PSO com outras topologias de vizinhança e/ou estratégias para evitar convergência prematura. Além disso, outros modelos de redes neurais podem ser implementados com o objetivo de permitir que o enxame execute tarefas mais complexas. Dentre elas, destacam-se as redes neurais auto-organizáveis.

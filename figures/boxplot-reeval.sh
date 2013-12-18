@@ -34,9 +34,7 @@ postscript('${output}', width = 6.0, height = 8.0,
            horizontal = FALSE, onefile = FALSE, paper = "special",
            family = "ComputerModern", encoding = "TeXtext.enc")
 
-reeval = read.csv('${file}', col.names=c('instance', 'fitness'))
+reeval = read.csv('${file}', head = F, col.names=c('instance', 'fitness'))
 reeval\$instance = factor(reeval\$instance, c(${order}))
 boxplot(fitness ~ instance, reeval, ylab = 'Fitness')
 EOF
-
-evince "${output}"

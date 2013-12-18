@@ -45,7 +45,7 @@ autokey = list(x = 0.02, y = 0.98, corner = c(0, 1),
                lines = T, points = F,
                background = 'white')
 
-fitness = read.csv('${file}', col.names=c('generation', 'fitness', 'grouping'))
+fitness = read.csv('${file}', head = F, col.names=c('generation', 'fitness', 'grouping'))
 fitness\$grouping = factor(fitness\$grouping, c('Melhor', 'Média'))
 
 xyplot(fitness ~ generation, data = fitness, groups = grouping, type = c('l'), grid = T,
