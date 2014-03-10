@@ -1,4 +1,4 @@
-\chapter{Resultados}
+\chapter{Resultados preliminares}
 \label{cha:results}
 
 \section{Observações iniciais}
@@ -56,11 +56,7 @@ A Figura \ref{fig:func-fitness-gen} mostra a evolução das populações (\fitne
     \label{fig:func-fitness-gen}
 \end{figure}
 
-O melhor indivíduo resultante do algoritmo de treinamento com alguma das funções de \fitness deve ser apto a reproduzir o mesmo comportamento no ambiente real onde a posição das áreas alvo é totalmente aleatória. A função de \fitness F contempla esse ambiente real. Por isso, utilizaremos a função F para estimar o desempenho de um indivíduo (após treinamento) em uma situação real.
-
-A Figura \ref{fig:reeval} informa o resultado de 500 avaliações da função de \fitness F a partir das soluções resultantes da execução de um GA para cada função de \fitness (ambientes de treinamento).
-
-Contraditoriamente, o desempenho da função \textbf{f3} é o pior dentre os quatro nessas condições.
+O melhor indivíduo resultante do algoritmo de treinamento com alguma das funções de \fitness deve ser apto a reproduzir o mesmo comportamento no ambiente real onde a posição das áreas alvo é totalmente aleatória. A função de \fitness F contempla esse ambiente real. Por isso, utilizaremos a função F para estimar o desempenho de um indivíduo (após treinamento) em uma situação real, ou seja, reavaliar a solução.
 
 \begin{figure}[h]
     \centering
@@ -69,7 +65,7 @@ Contraditoriamente, o desempenho da função \textbf{f3} é o pior dentre os qua
     \label{fig:reeval}
 \end{figure}
 
-A solução resultante da execução com a função \textbf{f3} explora o fato de que a distância entre as áreas alvo é sempre a mesma para todos os testes, daí o baixo desempenho quando reavaliada no contexto da situação real na qual a distância varia aleatoriamente.
+A Figura \ref{fig:reeval} informa o resultado de 500 reavaliações da função de \fitness F a partir das soluções resultantes da execução de um GA para cada função de \fitness (ambientes de treinamento). A função \textbf{f3} apresenta o pior resultado nesta fase, contradizendo o resultado obtido na fase de treinamento onde a função \textbf{f3} era a de maior \textit{fitness}. Isso indica uma maior perda de informação entre a fase de treinamento e o ambiente real quando utiliza-se da função \textbf{f3} (em relação às outras funções), visto que esta solução explora o fato de que a distância entre as áreas alvo é sempre a mesma para todos os testes.
 
 As funções \textbf{f2} e \textbf{f4} de fato levam a melhores soluções do que a função \textbf{f1}. Como discutido na Seção \ref{sec:exp-fitness}, a aleatoriedade, mais presente na função \textbf{f1}, atrapalha a evolução.
 
@@ -141,3 +137,12 @@ Os parâmetros do GA (e consequentemente do CGPGA) foram inicialmente escolhidos
 \end{figure}
 
 Observou-se que a mutação é crucial para que o algoritmo não fique preso em máximos locais, mas em exagero ocasiona muita perturbação e impede a evolução da população. O elitismo impede que boas soluções sejam perdidas facilmente ao longo da evolução.
+
+\section{Conclusão}
+\label{sec:conclusion}
+
+A partir da análise dos resultados, verificou-se que o não determinismo da função de \fitness degrada o desempenho de um algoritmo evolutivo. Assim, na fase de treinamento, a transformação dessa função a fim de reduzir fatores aleatórios -- e aproximá-la de uma função determinística -- de fato resulta em melhor desempenho. No entanto, deve ser feita com cuidado visto que o treinamento pode explorar alguma característica exposta pela transformação que não estará presente no ambiente real.
+
+Dentre os algoritmos de treinamento estudados (GA, CGPGA, PSO e DPSO), o GA com elitismo apresentou o melhor resultado. Para esse problema, a modelagem em ilhas do CGPGA não contribuiu na evolução da solução.
+
+No futuro, ainda cabe uma análise do PSO com outras topologias de vizinhança e/ou estratégias para evitar convergência prematura. Além disso, outros modelos de redes neurais podem ser implementados com o objetivo de permitir que o enxame execute tarefas mais complexas. Dentre elas, destacam-se as redes neurais auto-organizáveis.
