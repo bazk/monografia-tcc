@@ -3,7 +3,7 @@
 
 \section{Introdução}
 
-Como Sperati et al. [\cite{sperati2011path}], abordamos o problema de formação de caminho utilizando robótica evolutiva. Cada robô é controlado por uma \textit{Time-Delay Neural Network} (Seção \ref{sec:tdnn}) e seus parâmetros são ajustados por algoritmos evolutivos (Seção \ref{sec:evolutionary-computation}).
+Como Sperati et al. [\cite{sperati2011path}], abordamos o problema de formação de caminho utilizando robótica evolutiva. Cada robô é controlado por uma \textit{Time-Delay Neural Network} (Seção \ref{sec:tdnn}) e seus parâmetros (total de 113 pesos) são ajustados por algoritmos evolutivos (Seção \ref{sec:evolutionary-computation}).
 
 A Seção \ref{sec:robots} descreve o robô utilizado para os estudos. A Seção \ref{sec:environment} descreve o ambiente a que esses robôs são submetidos. A Seção \ref{sec:fitness} define a função de \fitness que avalia a qualidade de uma solução para a instância do problema em questão. Por fim, a Seção \ref{sec:simulation} apresenta o ambiente de simulação desenvolvido e a motivação para tal feito.
 
@@ -14,7 +14,7 @@ O robô utilizado como referência é o \textit{e-puck} \cite{mondada2009epuck},
 
 Para representar a informação captada pela câmera a codificamos em quatro valores binários: presença ou não de pontos azuis ou vermelhos (correspondendo aos LEDs dianteiros e traseiros, respectivamente) na região direita ou esquerda do campo de visão.
 
-A estrutura da rede neural pode ser vista na Figura \ref{fig:robot-ann}. O conjunto de entradas da rede é composto por todos os sensores normalizados e o conjunto de saídas controla os dois motores e os dois LEDs. Vale observar que a configuração da rede (estrutura e pesos) é homogênea à todos os robôs do enxame.
+A estrutura da rede neural pode ser vista na Figura \ref{fig:robot-ann}. O conjunto de entradas da rede é composto por todos os sensores do robô devidamente normalizados (total de 13 entradas) e o conjunto de saídas controla os dois motores e os dois LEDs (total de 4 saídas). Vale observar que a configuração da rede (estrutura e pesos) é homogênea à todos os robôs do enxame, ou seja, cada robô possuí sua própria rede neural funcionando de forma independente porém a configuração da rede é igual para todos os robôs de um enxame durante um experimento.
 
 \begin{figure}[H]
     \centering
@@ -54,7 +54,7 @@ $$
 
 onde $r$ é o raio das rodas do robô, $d$ é a distância entre as áreas alvo e $\omega_{ir} (t)$ e $\omega_{il} (t)$ equivalem, respectivamente, à velocidade angular das rodas direita e esquerda do robô $i$ no momento $t$.
 
-Na sequência, os seguintes passos são executados:
+Na sequência, o seguinte algoritmo é executado:
 
 \begin{enumerate}
     \item A solução $S$ é aplicada ao enxame de robôs.
@@ -69,33 +69,37 @@ Na sequência, os seguintes passos são executados:
     \item Finalmente, a \fitness do enxame é computada pela média de \fitness dos indivíduos que a compõe.
 \end{enumerate}
 
-Matematicamente,
+Essa sequência de passos pode ser expressa matematicamente pelas equações \ref{eq:fitness-alg1}, \ref{eq:fitness-alg2}, \ref{eq:fitness-alg3} e \ref{eq:fitness-alg4}.
 
-$$
+\begin{equation}
+\label{eq:fitness-alg1}
 e_{i} (t) = \left\{
 \begin{array}{l l}
 1 & \quad \text{se o robô $i$ entrar em uma nova área alvo}\\
 e_{i}(t - 1) - \delta_{i} (t) & \quad \text{caso contrário}
 \end{array} \right.
-$$
+\end{equation}
 
-$$
+\begin{equation}
+\label{eq:fitness-alg2}
 f_{i} (t) = f_{i} (t - 1) + \left\{
 \begin{array}{l l}
 e_{i}(t - 1) & \quad \text{se o robô $i$ entrar em uma nova área alvo}\\
 0 & \quad \text{caso contrário}
 \end{array} \right.
-$$
+\end{equation}
 
 \noindent\begin{minipage}{.5\linewidth}
-$$
+\begin{equation}
+\label{eq:fitness-alg3}
 F = \frac{1}{N} \sum_{i=1}^{N} f_{i} (T_{b}) / f_{max}
-$$
+\end{equation}
 \end{minipage}%
 \begin{minipage}{.5\linewidth}
-$$
+\begin{equation}
+\label{eq:fitness-alg4}
 f_{max} = \frac{2 \omega_{M} r T_{b}}{d}
-$$
+\end{equation}
 \end{minipage}\\
 
 Assim, um robô que se move de uma área alvo a outra da maneira mais eficiente -- pelo menor caminho e a máxima velocidade -- mantêm exatamente uma unidade de energia toda vez que entrar em uma área alvo. Por consequência, sua \fitness individual será máxima (um) e, se todos os indivíduos apresentarem o mesmo comportamento, a \fitness do enxame também será máxima.
@@ -108,7 +112,7 @@ Os algoritmos evolutivos utilizados na fase de treinamento necessitam de múltip
 O modelo mais comum de simulação baseia-se na aplicação de mecânica Newtoniana, porém Miglino et al. \cite{miglino1996evolving} aponta algumas dificuldades que podem ser encontradas com este tipo de simulador na fase de treinamento:
 \begin{enumerate}
     \item Vários simuladores não consideram todas as leis da física envolvidas na interação entre agentes reais com o ambiente, por exemplo massa, peso, fricção, inércia etc.
-    \item Sensores físicos retornam valores incertos e comandos enviados aos atuadores têm efeitos incertos. Em contraste, os ambientes de simulação geralmente retornam informações perfeitas.
+    \item Sensores físicos retornam valores incertos (ruídos) e comandos enviados aos atuadores têm efeitos incertos (por exemplo o deslize das rodas). Em contraste, os ambientes de simulação geralmente retornam informações perfeitas.
     \item Diferentes sensores e atuadores, mesmo que aparentemente idênticos, podem apresentar pequenas mudanças mecânicas ou elétricas levando a diferentes comportamentos. Este fato é geralmente ignorado em simuladores.
 \end{enumerate}
 

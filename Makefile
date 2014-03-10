@@ -1,17 +1,18 @@
 OUTPUT=monografia
 BIB=referencias
 
-all: $(OUTPUT).dvi $(OUTPUT).ps $(OUTPUT).pdf
+all: $(OUTPUT).pdf
 
-$(OUTPUT).ps: $(OUTPUT).dvi
-	dvips -o $(OUTPUT).ps $(OUTPUT).dvi
-
-$(OUTPUT).pdf: $(OUTPUT).dvi
-	dvipdf $(OUTPUT).dvi $(OUTPUT).pdf
+$(OUTPUT).pdf: $(OUTPUT).tex $(BIB).bbl
+	pdflatex $(OUTPUT) </dev/null
+	pdflatex $(OUTPUT) </dev/null
 
 $(OUTPUT).dvi: $(OUTPUT).tex $(BIB).bbl
 	latex $(OUTPUT) </dev/null
 	latex $(OUTPUT) </dev/null
+
+$(OUTPUT).ps: $(OUTPUT).dvi
+	dvips -o $(OUTPUT).ps $(OUTPUT).dvi
 
 $(BIB).bbl: $(BIB).bib
 	latex $(OUTPUT) </dev/null

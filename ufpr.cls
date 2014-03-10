@@ -235,6 +235,24 @@
   \setcounter{footnote}{0}%
   }
 
+\newcommand\makecaparelatorio{
+  \begin{titlepage}%
+    \null
+    \begin{center}
+      {\large UNIVERSIDADE FEDERAL DO PARAN{\'A}}\\
+      \vspace{2cm}
+      {\large \MakeUppercase\@author}\\
+      \vspace{8cm}
+      {\large \textbf{\MakeUppercase\@title}}\\
+      \vspace{9cm}
+      \MakeUppercase\@city\\
+      \vspace{0.5cm}
+      \@year
+    \end{center}
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  }
+
 \def\defesa#1{\gdef\@defesa{#1}}
 
 \newcommand\maketermo{
